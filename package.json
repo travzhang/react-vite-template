@@ -4,14 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vp dev",
+    "dev": "vite",
     "build": "tsgo -b && npm run build:client && npm run build:server",
     "build:client": "vite build --mode client",
     "build:server": "vite build",
-    "lint": "vp lint",
-    "format": "vp fmt",
-    "format-check": "vp fmt --check",
-    "test": "vp test"
+    "test": "vitest run"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.11",
@@ -38,7 +35,6 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "globals": "^17.4.0",
     "react-router-dom": "^7.13.1",
-    "vite": "^8.0.0",
-    "vite-plus": "^0.1.10"
+    "vite": "^8.0.0"
   }
 }
