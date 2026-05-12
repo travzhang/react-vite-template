@@ -63,9 +63,7 @@ const Projects = () => {
         setModalOpen(false);
         void fetchNotes();
       } catch (e) {
-        message.error(
-          noteApiErrorMessage(e, editing ? "更新失败" : "创建失败"),
-        );
+        message.error(noteApiErrorMessage(e, editing ? "更新失败" : "创建失败"));
       }
     } catch {
       /* ignore validate error */
