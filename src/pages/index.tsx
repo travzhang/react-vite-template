@@ -1,6 +1,13 @@
+import {Button} from "antd";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+
 const Index = () => {
+  const navigation = useNavigate()
+  useEffect(()=>{
+    navigation('/projects')
+  },[])
   return <div>
-    home
   </div>
 }
 

@@ -1,7 +1,9 @@
+import BasicLayout from "@/layouts/BasicLayout.tsx";
+
 const Projects = () => {
-  return <div>
+  return <BasicLayout>
     p
-  </div>
+  </BasicLayout>
 }
 
 export default Projects
