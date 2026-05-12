@@ -3,8 +3,7 @@ import routes from "~react-pages";
 
 const App = () => {
   return (
-    <div
-    >
+    <div>
       <div>{useRoutes(routes)}</div>
     </div>
   );

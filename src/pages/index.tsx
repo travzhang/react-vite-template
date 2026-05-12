@@ -1,14 +1,13 @@
-import {Button} from "antd";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import { Button } from "antd";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  const navigation = useNavigate()
-  useEffect(()=>{
-    navigation('/projects')
-  },[])
-  return <div>
-  </div>
-}
+  const navigation = useNavigate();
+  useEffect(() => {
+    navigation("/projects");
+  }, []);
+  return <div></div>;
+};
 
-export default Index
+export default Index;

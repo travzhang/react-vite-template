@@ -1,14 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import {
-  Button,
-  Form,
-  Input,
-  Modal,
-  Popconfirm,
-  Space,
-  Table,
-  message,
-} from "antd";
+import { Button, Form, Input, Modal, Popconfirm, Space, Table, message } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import BasicLayout from "@/layouts/BasicLayout.tsx";
 
@@ -173,11 +164,7 @@ const Projects = () => {
         destroyOnHidden
       >
         <Form form={form} layout="vertical" style={{ marginTop: 8 }}>
-          <Form.Item
-            label="标题"
-            name="title"
-            rules={[{ required: true, message: "请输入标题" }]}
-          >
+          <Form.Item label="标题" name="title" rules={[{ required: true, message: "请输入标题" }]}>
             <Input placeholder="标题" />
           </Form.Item>
           <Form.Item

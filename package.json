@@ -12,7 +12,11 @@
     "generate": "prisma generate",
     "postinstall": "npm run generate",
     "preinstall": "node ./scripts/check.mjs",
-    "migrate:sql": "prisma migrate diff --from-empty --to-schema-datamodel ./prisma/schema.prisma --script > ./schema.sql"
+    "migrate:sql": "prisma migrate diff --from-empty --to-schema-datamodel ./prisma/schema.prisma --script > ./schema.sql",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
   },
   "dependencies": {
     "@ant-design/icons": "6.x",
@@ -43,6 +47,8 @@
     "babel-plugin-istanbul": "^7.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "globals": "^17.4.0",
+    "oxfmt": "^0.48.0",
+    "oxlint": "^1.63.0",
     "react-router-dom": "^7.13.1",
     "vite": "^8.0.0"
   }
