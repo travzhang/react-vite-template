@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run generate && vite build --mode client && vite build",
-    "build:client": "vite build --mode client",
-    "build:server": "vite build",
+    "build": "npm run generate && npm run build:client && npm run build:server",
+    "build:client": "tsgo -b && vite build --mode client",
+    "build:server": "tsgo -b && vite build",
     "start": "node dist/index.js",
     "generate": "prisma generate",
     "postinstall": "npm run generate",
