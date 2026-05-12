@@ -5,7 +5,7 @@ import { swaggerUI } from "@hono/swagger-ui";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { fileURLToPath } from "node:url";
 
-import userApi from "@/api/routes/user.ts";
+import noteApi from "@/api/routes/note.ts";
 
 import { historyApiFallback } from "hono-history-api-fallback";
 
@@ -15,7 +15,7 @@ const app = new Hono();
 
 const api = new OpenAPIHono();
 
-api.route("/user", userApi);
+api.route("/notes", noteApi);
 
 api.doc("/doc", {
   openapi: "3.0.0",

@@ -27,3 +27,6 @@ dist-ssr
 pnpm-lock.yaml
 
 .env
+
+
+schema.sql
