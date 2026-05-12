@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { Button, Form, Input, Modal, Popconfirm, Space, Table, message } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import BasicLayout from "@/layouts/BasicLayout.tsx";
-
-type Note = {
-  id: string;
-  title: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import {
+  createNote,
+  deleteNote,
+  listNotes,
+  noteApiErrorMessage,
+  updateNote,
+  type Note,
+} from "@/services/notes.ts";
 
 const Projects = () => {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -21,9 +21,7 @@ const Projects = () => {
   const fetchNotes = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/notes");
-      if (!res.ok) throw new Error("请求失败");
-      const data = (await res.json()) as Note[];
+      const data = await listNotes();
       setNotes(data);
     } catch {
       message.error("无法加载笔记列表");
@@ -54,47 +52,34 @@ const Projects = () => {
   const submit = async () => {
     try {
       const values = await form.validateFields();
-      if (editing) {
-        const res = await fetch(`/api/notes/${editing.id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
-        if (!res.ok) {
-          const err = (await res.json().catch(() => ({}))) as {
-            message?: string;
-          };
-          message.error(err.message ?? "更新失败");
-          return;
+      try {
+        if (editing) {
+          await updateNote(editing.id, values);
+          message.success("已更新");
+        } else {
+          await createNote(values);
+          message.success("已创建");
         }
-        message.success("已更新");
-      } else {
-        const res = await fetch("/api/notes", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
-        });
-        if (!res.ok) {
-          message.error("创建失败");
-          return;
-        }
-        message.success("已创建");
+        setModalOpen(false);
+        void fetchNotes();
+      } catch (e) {
+        message.error(
+          noteApiErrorMessage(e, editing ? "更新失败" : "创建失败"),
+        );
       }
-      setModalOpen(false);
-      void fetchNotes();
     } catch {
       /* ignore validate error */
     }
   };
 
   const remove = async (id: string) => {
-    const res = await fetch(`/api/notes/${id}`, { method: "DELETE" });
-    if (!res.ok) {
-      message.error("删除失败");
-      return;
+    try {
+      await deleteNote(id);
+      message.success("已删除");
+      void fetchNotes();
+    } catch (e) {
+      message.error(noteApiErrorMessage(e, "删除失败"));
     }
-    message.success("已删除");
-    void fetchNotes();
   };
 
   const columns: ColumnsType<Note> = [
